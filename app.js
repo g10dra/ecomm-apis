@@ -5,8 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var productRouter = require('./routes/product');
 var conf = require('./config/conf');
 const { AuthMiddleware } = require('./utils/AuthMiddleware');
 
@@ -31,13 +31,8 @@ app.use(cookieParser());
 
 app.use(AuthMiddleware);
 
+app.use('/product',productRouter);
 app.use('/users', usersRouter);
-app.use('/privateData', indexRouter); 
-
-
-app.get('/', (req,res)=>{
-  res.json({success:true,message:'Wow root and public api working fine.'})
-}); 
 
 
 

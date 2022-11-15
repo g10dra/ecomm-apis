@@ -28,6 +28,20 @@ const UserRegister = async (req,res,next) => {
       }
 
 }
+/*
+const CreateSuperAdmin = async (req,res,next) => {
+    var user = new User({
+        name: 'Super Admin',
+        email: 'admin@admin.com',
+        password: '123456',
+        IsAdmin:true
+    });
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    await user.save(); 
+    return res.status(201).json({success:true,message:'super user register succesfully.'});
+}
+*/
 
 const UserLogin = async (req,res,next) => {
     
@@ -56,6 +70,7 @@ const UserLogin = async (req,res,next) => {
 
 module.exports = {
     UserRegister,
-    UserLogin
+    UserLogin,
+    //CreateSuperAdmin
 }
   

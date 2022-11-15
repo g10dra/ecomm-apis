@@ -1,8 +1,8 @@
 const { ValidateJWT } = require("./JwtUtil");
 
 const AuthMiddleware = function (req, res, next) {
-   //exclude public routes first
-   const publicRoutes = ['/','/users/public','/users/register','/users/login'];
+   //exclude public routes first 
+   const publicRoutes = ['/','/users/register','/users/login','/product']; // '/users/create-super-admin'
    const currentRoute = req.path;
    console.log(currentRoute)
    if (publicRoutes.includes(currentRoute)) {
