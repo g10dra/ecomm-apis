@@ -1,7 +1,7 @@
 const ProductModel = require('../models/ProductModel'); 
  
 const createProduct = (req, res) => {
-    //check existing is alreday in database
+    //check existing is already in database
     ProductModel.find().and([{ title: req.body.title }])
         .then(product => {
             if (product.length == 0) {
