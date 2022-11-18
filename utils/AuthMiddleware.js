@@ -4,7 +4,6 @@ const AuthMiddleware = function (req, res, next) {
    //exclude public routes first 
    const publicRoutes = ['/','/users/register','/users/login','/product']; // '/users/create-super-admin'
    const currentRoute = req.path;
-   console.log(currentRoute)
    if (publicRoutes.includes(currentRoute)) {
        next();
    } else {
@@ -17,10 +16,11 @@ const AuthMiddleware = function (req, res, next) {
             ValidateJWT(token, function (err, decoded) { 
                 if (err) return res.status(401).json({ error: true, message: 'Failed to authenticate token.' });
                 req.currentUserId=decoded.user_id;
+                //add code related to IsAdmin and Product route
                 next();
             });
         } else {
-            res.status(403).json({
+            res.status(401).json({
                 error:true,
                 message: "Auth Token is missing in headers!"
             })
