@@ -115,7 +115,7 @@ const getAllProducts = async (req, res) => {
     
     const limit = req.body.pageSize || 10; //how much records we want want to return in 1 page, per page value
     const pageNumber = req.body.page || 1;
-    const skip = parseInt(pageNumber-1) * parseInt(limit); 
+    const skip = parseInt(pageNumber-1) * parseInt(limit);
     const conditions = {};
     const pagingQuery = { skip, limit };
     const allfilters = req.body.filters || [];

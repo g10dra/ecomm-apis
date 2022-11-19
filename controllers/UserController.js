@@ -60,7 +60,7 @@ const UserLogin = async (req,res,next) => {
         if (!validPassword) {
             return res.status(400).json({error:true,message:'Incorrect email or password.'});
         }
-        const token = GenerateJWT(user._id);
+        const token = GenerateJWT({user_id:user._id,IsAdmin:user?.IsAdmin || false});
         return res.status(200).json({success:true,message:'User Logged in Successfully',token});
     } else {
         return res.status(400).json({error:true,message:'User Not Exists!.'});

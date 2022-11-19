@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 var usersRouter = require('./routes/users');
 var productRouter = require('./routes/product');
+var orderRouter = require('./routes/order');
 var conf = require('./config/conf');
 const { AuthMiddleware } = require('./utils/AuthMiddleware');
 
@@ -27,12 +28,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use('/static',express.static(__dirname + '/uploads'));
 
 
 app.use(AuthMiddleware);
 
 app.use('/product',productRouter);
 app.use('/users', usersRouter);
+app.use('/order', orderRouter);
+
 
 
 

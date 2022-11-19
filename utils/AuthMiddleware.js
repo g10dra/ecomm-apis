@@ -2,7 +2,7 @@ const { ValidateJWT } = require("./JwtUtil");
 
 const AuthMiddleware = function (req, res, next) {
    //exclude public routes first 
-   const publicRoutes = ['/','/users/register','/users/login','/product']; // '/users/create-super-admin'
+   const publicRoutes = ['/','/users/register','/users/login','/product/getAll' ]; // '/users/create-super-admin'
    const currentRoute = req.path;
    if (publicRoutes.includes(currentRoute)) {
        next();
@@ -16,8 +16,14 @@ const AuthMiddleware = function (req, res, next) {
             ValidateJWT(token, function (err, decoded) { 
                 if (err) return res.status(401).json({ error: true, message: 'Failed to authenticate token.' });
                 req.currentUserId=decoded.user_id;
-                //add code related to IsAdmin and Product route
-                next();
+                if(currentRoute.includes('/product') && Boolean(decoded?.IsAdmin)===false){
+                    res.status(403).json({
+                        error:true,
+                        message: "Forbidden, you are not Authorised to manage products!"
+                    })
+                }else{
+                 next();
+                }
             });
         } else {
             res.status(401).json({

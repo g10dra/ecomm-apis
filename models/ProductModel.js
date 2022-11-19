@@ -8,7 +8,7 @@ const ProductSchema = Mongoose.Schema({
     }, 
     description: {
         type:String,
-        required:[true,'About the person is required']
+        required:[true,'Description is required']
     },
     price: {
         type:Number,
